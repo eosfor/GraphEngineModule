@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>GraphEngineModule</AssemblyName>
+    <RootNamespace>GraphEngineModule</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphEngine.Core" Version="2.0.9328" />
+    <PackageReference Include="GraphEngine.LIKQ" Version="2.0.9328" />
+    <PackageReference Include="GraphEngine.Storage.Composite" Version="2.0.9328" />
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0-preview-03" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="GraphEngineModule.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

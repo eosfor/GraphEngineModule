@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "pscoretest": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\6.0.0\\pwsh.exe",
+      "commandLineArgs": "-noexit -command \"&{ import-module .\\GraphEngineModule -verbose}\""
+    }
+  }
+}
