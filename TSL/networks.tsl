@@ -1,0 +1,57 @@
+cell struct VNET {
+	string SubscriptionID;
+    string Name;
+    string ResourceType;
+    string ResourceGroupName;
+    string Location;
+    //array  Subnets;
+    string AddressSpace;
+    string DHCPOptions;
+    string PeeredNetwork;
+    string VNETType;
+    string ResourceID;
+	[GraphEdge] optional List<CellId> OutEgde;
+	[GraphEdge] optional List<CellId> InEgde;
+}
+
+cell struct Subscription {
+	string SubscriptionID;
+    string SubscriptionName;
+    string ResourceID;
+	//List<CellId> OutEgde;
+	//List<CellId> InEgde;
+}
+
+cell struct Gateway {
+	string Name;
+    string ResourceType;
+    string SubscriptionID;
+    //array Properties;
+    string ResourceID;
+	//List<CellId> OutEgde;
+	//List<CellId> InEgde;
+}
+
+cell struct Connection {
+	string Name;
+    string ResourceName;
+    string ResourceType;
+    string Location;
+    string SubscriptionID;
+    //array Properties;
+    string ResourceID;
+	//List<CellId> OutEgde;
+	//List<CellId> InEgde;
+}
+
+cell struct Circuit {
+    string Name;
+    string ResourceName;
+    string ResourceType;
+    string Location;
+    string SubscriptionID;
+    //array Properties;
+    string ResourceID;
+	//List<CellId> OutEgde;
+	//List<CellId> InEgde;
+}
