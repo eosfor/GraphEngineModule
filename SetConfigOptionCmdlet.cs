@@ -22,8 +22,6 @@ namespace GraphEngineMolule
 
         protected override void BeginProcessing()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_BindingRedirect;
-
             base.BeginProcessing();
         }
 
@@ -56,24 +54,6 @@ namespace GraphEngineMolule
 
             }
             //base.ProcessRecord();
-        }
-
-
-        public static Assembly CurrentDomain_BindingRedirect(object sender, ResolveEventArgs args)
-
-        {
-
-            var name = new AssemblyName(args.Name);
-            switch (name.Name)
-            {
-                case "Newtonsoft.Json":
-                    return typeof(Newtonsoft.Json.JsonSerializer).Assembly;
-                case "Trinity.Core":
-                    return Assembly.LoadFrom(@"C:\Repo\Github\Public\00 - MSFT\GraphEngine\bin\netstandard2.0\Trinity.Core.dll");
-                default:
-                    return null;
-            }
-
         }
     }
 }
