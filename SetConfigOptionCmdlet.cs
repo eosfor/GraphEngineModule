@@ -5,11 +5,12 @@ using Trinity;
 using Trinity.Storage.Composite;
 using Trinity.Configuration;
 using System.Reflection;
+using GraphEngineModule;
 
 namespace GraphEngineMolule
 {
-    [Cmdlet("Set", "ConfigOption")]
-    public class SetConfigOptionCmdlet : PSCmdlet
+    [Cmdlet("Set", "GEConfigOption")]
+    public class SetGEConfigOptionCmdlet : PSCmdlet
     {
         [Parameter(Mandatory = false)]
         public string LogDirectory;
@@ -22,12 +23,15 @@ namespace GraphEngineMolule
 
         protected override void BeginProcessing()
         {
+            if (!GlobalState.Instance.IsInitialized)
+            {
+                Global.Initialize();
+            }
             base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            //Global.Initialize();
 
             if (this.MyInvocation.BoundParameters.ContainsKey("LogLevel"))
             {

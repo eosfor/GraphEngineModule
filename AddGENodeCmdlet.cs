@@ -9,34 +9,30 @@ using System.Reflection;
 using Trinity.Utilities;
 using Trinity.Storage;
 using System.Linq;
-using GraphEngineModule;
 
-namespace GraphEngineMolule
+
+namespace GraphEngineModule
 {
-    [Cmdlet("Add", "GETslData")]
-    public class AddTslDataCmdlet : PSCmdlet
+    [Cmdlet("Add", "GEVertex")]
+    [Alias("Add-Vertex")]
+    public class AddGENodeCmdlet : PSCmdlet
     {
         [Parameter()]
-        public string Path;
-
-        [Parameter()]
-        public string Namespace;
+        public ICell Vertex;
 
         protected override void BeginProcessing()
         {
-            if (! GlobalState.Instance.IsInitialized)
+            if (!GlobalState.Instance.IsInitialized)
             {
                 Global.Initialize();
             }
             base.BeginProcessing();
         }
 
-
         protected override void ProcessRecord()
         {
-            CompositeStorage.AddStorageExtension(Path, Namespace);
-            
-            //base.ProcessRecord();
+            Global.LocalStorage.SaveGenericCell(Vertex);
+            base.ProcessRecord();
         }
     }
 }
