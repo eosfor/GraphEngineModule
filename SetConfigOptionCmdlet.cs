@@ -5,11 +5,12 @@ using Trinity;
 using Trinity.Storage.Composite;
 using Trinity.Configuration;
 using System.Reflection;
+using GraphEngineModule;
 
 namespace GraphEngineMolule
 {
-    [Cmdlet("Set", "ConfigOption")]
-    public class SetConfigOptionCmdlet : PSCmdlet
+    [Cmdlet("Set", "GEConfigOption")]
+    public class SetGEConfigOptionCmdlet : PSCmdlet
     {
         [Parameter(Mandatory = false)]
         public string LogDirectory;
@@ -22,14 +23,15 @@ namespace GraphEngineMolule
 
         protected override void BeginProcessing()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_BindingRedirect;
-
+            if (!GlobalState.Instance.IsInitialized)
+            {
+                Global.Initialize();
+            }
             base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            //Global.Initialize();
 
             if (this.MyInvocation.BoundParameters.ContainsKey("LogLevel"))
             {
@@ -56,24 +58,6 @@ namespace GraphEngineMolule
 
             }
             //base.ProcessRecord();
-        }
-
-
-        public static Assembly CurrentDomain_BindingRedirect(object sender, ResolveEventArgs args)
-
-        {
-
-            var name = new AssemblyName(args.Name);
-            switch (name.Name)
-            {
-                case "Newtonsoft.Json":
-                    return typeof(Newtonsoft.Json.JsonSerializer).Assembly;
-                case "Trinity.Core":
-                    return Assembly.LoadFrom(@"C:\Repo\Github\Public\00 - MSFT\GraphEngine\bin\netstandard2.0\Trinity.Core.dll");
-                default:
-                    return null;
-            }
-
         }
     }
 }
