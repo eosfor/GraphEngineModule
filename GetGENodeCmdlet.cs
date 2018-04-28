@@ -34,7 +34,6 @@ namespace GraphEngineModule
 
         protected override void ProcessRecord()
         {
-            IEnumerable<ICell> ret;
             switch (ParameterSetName)
             {
                 case "ByID":
@@ -46,9 +45,6 @@ namespace GraphEngineModule
                 default:
                     break;
             }
-
-            
-            //base.ProcessRecord();
         }
 
         private void ByID()
@@ -57,29 +53,7 @@ namespace GraphEngineModule
             IEnumerable<ICell> result = from node in Global.LocalStorage.GenericCell_Selector()
                                         where node.CellId == NodeID
                                         select node;
-            WriteObject(result, true);
-            //using  ( var node = Global.LocalStorage.UseGenericCell(NodeID))
-            //{
-            //    var o = ConvertToPSObject(node);
-            //    WriteObject(o);
-
-            //}           
-        }
-
-        // this is to decouple references to objects stored in the Storage from ones returned to the user. ???
-        private static PSObject ConvertToPSObject(ICell node)
-        {
-            var fields = node.GetFieldNames();
-            PSObject o = new PSObject();
-
-            foreach (var item in fields)
-            {
-                var propValue = node.GetField<string>(item);
-                var p = new PSNoteProperty(item, propValue.ToString());
-                o.Properties.Add(p);
-            }
-            
-            return o;
+            WriteObject(result, true);     
         }
 
         private void ByTypeName ()
