@@ -3,7 +3,7 @@
     "pscoretest": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\PowerShell\\6.0.0\\pwsh.exe",
-      "commandLineArgs": "-noexit -command \"&{ import-module .\\GraphEngineModule -verbose}\""
+      "commandLineArgs": "-noexit -command \"&{ import-module .\\GraphEngineModule -verbose; import-module 'C:\\Program Files\\WindowsPowerShell\\Modules\\pester'}\""
     }
   }
 }

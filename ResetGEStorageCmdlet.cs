@@ -12,19 +12,9 @@ using System.Linq;
 
 namespace GraphEngineModule
 {
-    [Cmdlet("Add", "GEEdge")]
-    [Alias("Add-Edge")]
-    public class AddGEEdgeCmdlet : PSCmdlet
+    [Cmdlet("Reset", "GEStorage")]
+    public class ResetGEStorageCmdlet : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
-        public ICell From;
-
-        [Parameter(Mandatory = true)]
-        public ICell To;
-
-        [Parameter(Mandatory = false)]
-        public string Label;
-
         protected override void BeginProcessing()
         {
             if (!GlobalState.Instance.IsInitialized)
@@ -36,9 +26,9 @@ namespace GraphEngineModule
 
         protected override void ProcessRecord()
         {
-            From.AppendToField("OutEdge", To.CellId);
-            Global.LocalStorage.SaveGenericCell(From);
-            base.ProcessRecord();
+            Global.LocalStorage.ResetStorage();
+            GlobalState.Instance.IsInitialized = false;
+            //base.BeginProcessing();
         }
     }
 }

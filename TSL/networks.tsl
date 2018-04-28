@@ -11,8 +11,8 @@ cell VNET {
     string PeeredNetwork;
     string VNETType;
     string ResourceID;
-	[GraphEdge] optional List<CellId> OutEgde;
-	[GraphEdge] optional List<CellId> InEgde;
+	[GraphEdge] optional List<CellId> OutEdge;
+	[GraphEdge] optional List<CellId> InEdge;
 }
 
 [GraphNode]
@@ -20,8 +20,8 @@ cell Subscription {
 	string SubscriptionID;
     string SubscriptionName;
     string ResourceID;
-	[GraphEdge] optional List<CellId> OutEgde;
-	[GraphEdge] optional List<CellId> InEgde;
+	[GraphEdge] optional List<CellId> OutEdge;
+	[GraphEdge] optional List<CellId> InEdge;
 }
 
 [GraphNode]
@@ -31,8 +31,8 @@ cell Gateway {
     string SubscriptionID;
     //array Properties;
     string ResourceID;
-	[GraphEdge] optional List<CellId> OutEgde;
-	[GraphEdge] optional List<CellId> InEgde;
+	[GraphEdge] optional List<CellId> OutEdge;
+	[GraphEdge] optional List<CellId> InEdge;
 }
 
 [GraphNode]
@@ -44,8 +44,8 @@ cell Connection {
     string SubscriptionID;
     //array Properties;
     string ResourceID;
-	[GraphEdge] optional List<CellId> OutEgde;
-	[GraphEdge] optional List<CellId> InEgde;
+	[GraphEdge] optional List<CellId> OutEdge;
+	[GraphEdge] optional List<CellId> InEdge;
 }
 
 [GraphNode]
@@ -57,6 +57,12 @@ cell Circuit {
     string SubscriptionID;
     //array Properties;
     string ResourceID;
-	[GraphEdge] optional List<CellId> OutEgde;
-	[GraphEdge] optional List<CellId> InEgde;
+	[GraphEdge] optional List<CellId> OutEdge;
+	[GraphEdge] optional List<CellId> InEdge;
+}
+
+cell Edge {
+	string Label;
+	[GraphEdge] CellId OutEdge;
+	[GraphEdge] CellId InEdge;	
 }
