@@ -21,11 +21,16 @@ namespace GraphEngineMolule
         [Parameter(Mandatory = false)]
         public string StorageRoot;
 
+        [Parameter(Mandatory = false)]
+        public bool LogEchoOnConsole;
+        
         protected override void BeginProcessing()
         {
             if (!GlobalState.Instance.IsInitialized)
             {
                 Global.Initialize();
+                TrinityConfig.LogEchoOnConsole = false;
+                LoggingConfig.Instance.LogEchoOnConsole = false;
             }
             base.BeginProcessing();
         }
@@ -57,6 +62,13 @@ namespace GraphEngineMolule
                 else { throw new DirectoryNotFoundException(); }
 
             }
+
+
+            if (this.MyInvocation.BoundParameters.ContainsKey("LogEchoOnConsole"))
+            {
+                TrinityConfig.LogEchoOnConsole = false;
+            }
+
             //base.ProcessRecord();
         }
     }
