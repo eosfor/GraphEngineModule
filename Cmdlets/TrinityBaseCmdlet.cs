@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Management.Automation;
 using Trinity.Storage.Composite;
+using GraphEngineModule.Exceptions;
 
 namespace GraphEngineModule
 {
@@ -13,9 +14,8 @@ namespace GraphEngineModule
         {
             if (!GlobalState.Instance.IsInitialized)
             {
-                ThrowTerminatingError(new ErrorRecord(new NotInitializedException(), "100", ErrorCategory.ResourceUnavailable, this));
+                ThrowTerminatingError(new ErrorRecord(new GEIsNotInitializedException(), "GE_NOT_INITIALIZED", ErrorCategory.ResourceUnavailable, this));
             }
-            //base.BeginProcessing();
         }
     }
 }
