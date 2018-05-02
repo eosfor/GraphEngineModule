@@ -13,7 +13,7 @@ using System.Linq;
 namespace GraphEngineModule
 {
     [Cmdlet("Save","GEStorage")]
-    class SaveStorageCmdlet : PSCmdlet
+    class SaveStorageCmdlet : TrinityBaseCmdlet
     {
         protected override void ProcessRecord()
         {

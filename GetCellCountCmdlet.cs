@@ -14,7 +14,7 @@ using System.Linq;
 namespace GraphEngineModule
 {
     [Cmdlet("Get","GECellCount")]
-    public class GetCellCountCmdlet: PSCmdlet
+    public class GetCellCountCmdlet: TrinityBaseCmdlet
     {
         protected override void ProcessRecord()
         {

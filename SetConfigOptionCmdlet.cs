@@ -10,7 +10,7 @@ using GraphEngineModule;
 namespace GraphEngineMolule
 {
     [Cmdlet("Set", "GEConfigOption")]
-    public class SetGEConfigOptionCmdlet : PSCmdlet
+    public class SetGEConfigOptionCmdlet : TrinityBaseCmdlet
     {
         [Parameter(Mandatory = false)]
         public string LogDirectory;
@@ -28,9 +28,7 @@ namespace GraphEngineMolule
         {
             if (!GlobalState.Instance.IsInitialized)
             {
-                Global.Initialize();
-                TrinityConfig.LogEchoOnConsole = false;
-                LoggingConfig.Instance.LogEchoOnConsole = false;
+                GlobalState.Instance.Initialize(LogDirectory, StorageRoot, LogEchoOnConsole);
             }
             base.BeginProcessing();
         }
