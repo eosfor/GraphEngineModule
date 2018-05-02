@@ -32,7 +32,7 @@ namespace GraphEngineModule
         protected override void ProcessRecord()
         {
             Global.LocalStorage.SaveGenericCell(Vertex);
-            base.ProcessRecord();
+            //base.ProcessRecord();
         }
     }
 }

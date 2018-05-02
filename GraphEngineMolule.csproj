@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>GraphEngineModule</AssemblyName>
     <RootNamespace>GraphEngineModule</RootNamespace>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -15,8 +15,9 @@
     <PackageReference Include="GraphEngine.Core" Version="2.0.9328" />
     <PackageReference Include="GraphEngine.LIKQ" Version="2.0.9328" />
     <PackageReference Include="GraphEngine.Storage.Composite" Version="2.0.9328" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="2.0.0" />
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.0-preview-03" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.6" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
   </ItemGroup>
@@ -27,4 +28,14 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <TslCodegen Include="**/*.tsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="GeneratedCode\**" />
+    <EmbeddedResource Remove="GeneratedCode\**" />
+    <None Remove="GeneratedCode\**" />
+    <TslCodegen Remove="GeneratedCode\**" />
+  </ItemGroup>
 </Project>

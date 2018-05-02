@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Management.Automation;
 using Trinity;
-using Trinity.Storage.Composite;
-using System.Reflection;
-using Trinity.Utilities;
 using Trinity.Storage;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
+using FanoutSearch.LIKQ;
 using System.Linq;
-using Newtonsoft.Json;
+using System;
+using System.Reflection;
+
+//using System.Linq;
+//using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace GraphEngineModule
 {
@@ -22,6 +24,15 @@ namespace GraphEngineModule
 
         [Parameter(Mandatory = true, ParameterSetName = "ByTypeName")]
         public string TypeName;
+
+        [Parameter(Mandatory = true, ParameterSetName = "ByQuery")]
+        public string ParameterName;
+
+        [Parameter(Mandatory = true, ParameterSetName = "ByQuery")]
+        public string ParameterValue;
+
+        [Parameter(Mandatory = true, ParameterSetName = "ByLIKQQuery")]
+        public long StartFromID;
 
         protected override void BeginProcessing()
         {
@@ -42,9 +53,26 @@ namespace GraphEngineModule
                 case "ByTypeName" :
                     ByTypeName();
                     break;
+                case "ByQuery" :
+                    ByQuery();
+                    break;
+                case "ByLIKQQuery":
+                    ByLIKQQuery();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void ByLIKQQuery()
+        {
+            var t = KnowledgeGraph.StartFrom(StartFromID)
+                .FollowEdge("OutEdge")
+                .VisitNode(_ => FanoutSearch.Action.Return);
+            var r = t.ToList();
+
+            WriteObject(r, true);
+            //throw new NotImplementedException();
         }
 
         private void ByID()
@@ -64,6 +92,28 @@ namespace GraphEngineModule
 
 
             WriteObject(result,true);
+        }
+
+        private void ByQuery()
+        {
+
+            // get all available types
+            var types = Global.StorageSchema.CellDescriptors.ToArray();
+
+            // filter only types containing field name we need
+            var typesFiltered = types
+                .Where(x => x.GetFieldNames().Contains(ParameterName))
+                .Select(x => x.Type)
+                .ToArray();
+
+            // filter only cells of the specific types having specific value of the specified field
+            var list = Global.LocalStorage.GenericCell_Selector().AsQueryable();
+            var result = list
+                .Where(x => typesFiltered.Contains(x.Type))
+                .Where(x => x.GetField<string>(ParameterName) == ParameterValue)
+                .ToArray();
+
+            WriteObject(result, true);
         }
     }
 }

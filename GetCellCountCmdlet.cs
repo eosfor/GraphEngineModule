@@ -10,23 +10,16 @@ using Trinity.Utilities;
 using Trinity.Storage;
 using System.Linq;
 
+
 namespace GraphEngineModule
 {
-    [Cmdlet("Get", "GETypeName")]
-    public class GetGETypeNameCmdlet : PSCmdlet
+    [Cmdlet("Get","GECellCount")]
+    public class GetCellCountCmdlet: PSCmdlet
     {
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
-
         protected override void ProcessRecord()
         {
-            WriteObject(Global.StorageSchema.CellDescriptors, true);
+            WriteObject(Global.LocalStorage.CellCount);
+            //base.ProcessRecord();
         }
     }
 }

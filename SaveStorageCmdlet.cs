@@ -12,21 +12,13 @@ using System.Linq;
 
 namespace GraphEngineModule
 {
-    [Cmdlet("Get", "GETypeName")]
-    public class GetGETypeNameCmdlet : PSCmdlet
+    [Cmdlet("Save","GEStorage")]
+    class SaveStorageCmdlet : PSCmdlet
     {
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
-
         protected override void ProcessRecord()
         {
-            WriteObject(Global.StorageSchema.CellDescriptors, true);
+            Global.LocalStorage.SaveStorage();
+            base.ProcessRecord();
         }
     }
 }

@@ -4,6 +4,12 @@
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\PowerShell\\6.0.0\\pwsh.exe",
       "commandLineArgs": "-noexit -command \"&{ import-module .\\GraphEngineModule -verbose; import-module 'C:\\Program Files\\WindowsPowerShell\\Modules\\pester'}\""
+    },
+    "ps5test": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "commandLineArgs": "-noexit -command \"&{ import-module .\\GraphEngineModule -verbose; import-module 'C:\\Program Files\\WindowsPowerShell\\Modules\\pester'}\"",
+      "workingDirectory": "C:\\Repo\\Github\\My\\GraphEngineModule\\bin\\Debug\\net461"
     }
   }
 }
