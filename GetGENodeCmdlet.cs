@@ -8,6 +8,9 @@ using FanoutSearch.LIKQ;
 using System.Linq;
 using System;
 using System.Reflection;
+using Trinity.Network;
+using FanoutSearch;
+using Trinity.Storage.Composite;
 
 //using System.Linq;
 //using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +20,7 @@ namespace GraphEngineModule
 {
     [Cmdlet("Get", "GEVertex")]
     [Alias("Get-Vertex")]
-    public class GetGEVertexCmdlet : PSCmdlet
+    public class GetGEVertexCmdlet : TrinityBaseCmdlet
     {
         [Parameter(Mandatory = true, ParameterSetName = "ByID")]
         public long NodeID;
@@ -33,15 +36,6 @@ namespace GraphEngineModule
 
         [Parameter(Mandatory = true, ParameterSetName = "ByLIKQQuery")]
         public long StartFromID;
-
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
 
         protected override void ProcessRecord()
         {
@@ -71,7 +65,7 @@ namespace GraphEngineModule
                 .VisitNode(_ => FanoutSearch.Action.Return);
             var r = t.ToList();
 
-            WriteObject(r, true);
+            WriteObject(r);
             //throw new NotImplementedException();
         }
 

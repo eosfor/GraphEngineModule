@@ -14,7 +14,7 @@ using GraphEngineModule;
 namespace GraphEngineMolule
 {
     [Cmdlet("Add", "GETslData")]
-    public class AddTslDataCmdlet : PSCmdlet
+    public class AddTslDataCmdlet : TrinityBaseCmdlet
     {
         [Parameter()]
         public string Path;
@@ -22,21 +22,9 @@ namespace GraphEngineMolule
         [Parameter()]
         public string Namespace;
 
-        protected override void BeginProcessing()
-        {
-            if (! GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
-
-
         protected override void ProcessRecord()
         {
-            // var asm = Assembly.LoadFrom(@"C:\Users\Andrey_Vernigora\AppData\Local\Temp\tmp5276.tmp\obj\Release\netstandard2.0\da1afc060ec746f49c23a14661222256.dll");
-            CompositeStorage.AddStorageExtension(Path, Namespace);
-            
+            CompositeStorage.AddStorageExtension(Path, Namespace);            
             //base.ProcessRecord();
         }
     }

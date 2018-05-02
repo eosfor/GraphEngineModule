@@ -14,7 +14,7 @@ using Trinity.Core.Lib;
 namespace GraphEngineModule.Tests
 {
     [Cmdlet("Get", "GEStringHash")]
-    public class GetGEStringHashCmdlet : PSCmdlet
+    public class GetGEStringHashCmdlet : TrinityBaseCmdlet
     {
         [Parameter(Mandatory = true)]
         public string String;

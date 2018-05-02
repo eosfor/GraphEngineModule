@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphEngineMolule", "GraphEngineMolule.csproj", "{D8D959A4-7867-492C-8881-8E835F17E3FC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Core", "..\..\Public\00 - MSFT\GraphEngine\src\Trinity.Core\Trinity.Core.csproj", "{9A76254D-EE09-47BC-A47C-A6DDB6FBA62F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{D8D959A4-7867-492C-8881-8E835F17E3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8D959A4-7867-492C-8881-8E835F17E3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8D959A4-7867-492C-8881-8E835F17E3FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A76254D-EE09-47BC-A47C-A6DDB6FBA62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A76254D-EE09-47BC-A47C-A6DDB6FBA62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

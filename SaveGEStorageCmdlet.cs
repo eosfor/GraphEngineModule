@@ -13,17 +13,8 @@ using System.Linq;
 namespace GraphEngineModule
 {
     [Cmdlet("Save", "GEStorage")]
-    public class SaveGEStorageCmdlet: PSCmdlet
+    public class SaveGEStorageCmdlet: TrinityBaseCmdlet
     {
-
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
 
         protected override void ProcessRecord()
         {

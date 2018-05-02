@@ -13,21 +13,12 @@ using System.Linq;
 namespace GraphEngineModule
 {
     [Cmdlet("Reset", "GEStorage")]
-    public class ResetGEStorageCmdlet : PSCmdlet
+    public class ResetGEStorageCmdlet : TrinityBaseCmdlet
     {
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
 
         protected override void ProcessRecord()
         {
             Global.LocalStorage.ResetStorage();
-            GlobalState.Instance.IsInitialized = false;
             //base.BeginProcessing();
         }
     }

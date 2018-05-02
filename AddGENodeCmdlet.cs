@@ -15,19 +15,10 @@ namespace GraphEngineModule
 {
     [Cmdlet("Add", "GEVertex")]
     [Alias("Add-Vertex")]
-    public class AddGENodeCmdlet : PSCmdlet
+    public class AddGENodeCmdlet : TrinityBaseCmdlet
     {
         [Parameter()]
         public ICell Vertex;
-
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
 
         protected override void ProcessRecord()
         {

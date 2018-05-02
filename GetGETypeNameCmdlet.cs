@@ -13,16 +13,8 @@ using System.Linq;
 namespace GraphEngineModule
 {
     [Cmdlet("Get", "GETypeName")]
-    public class GetGETypeNameCmdlet : PSCmdlet
+    public class GetGETypeNameCmdlet : TrinityBaseCmdlet
     {
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
 
         protected override void ProcessRecord()
         {

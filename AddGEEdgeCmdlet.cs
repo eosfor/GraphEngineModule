@@ -14,7 +14,7 @@ namespace GraphEngineModule
 {
     [Cmdlet("Add", "GEEdge")]
     [Alias("Add-Edge")]
-    public class AddGEEdgeCmdlet : PSCmdlet
+    public class AddGEEdgeCmdlet : TrinityBaseCmdlet
     {
         [Parameter(Mandatory = true)]
         public ICell From;
@@ -24,15 +24,6 @@ namespace GraphEngineModule
 
         [Parameter(Mandatory = false)]
         public string Label;
-
-        protected override void BeginProcessing()
-        {
-            if (!GlobalState.Instance.IsInitialized)
-            {
-                Global.Initialize();
-            }
-            base.BeginProcessing();
-        }
 
         protected override void ProcessRecord()
         {
