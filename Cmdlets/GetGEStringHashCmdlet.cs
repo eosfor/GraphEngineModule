@@ -17,11 +17,35 @@ namespace GraphEngineModule.Tests
     public class GetGEStringHashCmdlet : TrinityBaseCmdlet
     {
         [Parameter(Mandatory = true)]
-        public string String;
+        [AllowNull]
+        public string[] String;
+
+        protected override void BeginProcessing()
+        {
+            //base.BeginProcessing();
+        }
 
         protected override void ProcessRecord()
         {
-            WriteObject(HashHelper.HashString2Int64(String));
+            List<long> ret = new List<long>();
+
+            if (String == null) { WriteObject(ret); return; }
+
+            foreach (var str in String)
+            {
+                if (! string.IsNullOrEmpty(str))
+                    ret.Add(HashHelper.HashString2Int64(str));
+            }
+
+            if (ret.Count == 1)
+            {
+                WriteObject(ret[0]);
+            }
+            else
+            {
+                WriteObject(ret);
+            }
+            
             //base.ProcessRecord();
         }
     }

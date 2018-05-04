@@ -1,6 +1,6 @@
 [GraphNode]
 cell VNET {
-	string SubscriptionID;
+	[GraphEdge] CellId SubscriptionID;
     string Name;
     string ResourceType;
     string ResourceGroupName;
@@ -8,9 +8,10 @@ cell VNET {
     //array  Subnets;
     string AddressSpace;
     string DHCPOptions;
-    string PeeredNetwork;
+    [GraphEdge] optional List<CellId> PeeredNetwork;
     string VNETType;
     string ResourceID;
+	optional string Gateway;
 	[GraphEdge] optional List<CellId> OutEdge;
 	[GraphEdge] optional List<CellId> InEdge;
 }
@@ -59,6 +60,13 @@ cell Circuit {
     string ResourceID;
 	[GraphEdge] optional List<CellId> OutEdge;
 	[GraphEdge] optional List<CellId> InEdge;
+}
+
+[GraphNode]
+cell Node {
+	string Label;
+	[GraphEdge] CellId OutEdge;
+	[GraphEdge] CellId InEdge;
 }
 
 cell Edge {
