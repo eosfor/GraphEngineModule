@@ -4,9 +4,6 @@ invoke-pester ..\..\..\tests
 
 #>
 
-Set-GEConfigOption -LogDirectory "C:\Tests\psTrinityTests\storage\trinity-log" -StorageRoot "C:\Tests\psTrinityTests\storage" -LogEchoOnConsole $false
-Add-GETslData -Path C:\Repo\Github\My\GraphEngineModule\TSL\ -Namespace tsltest
-
 <#
 		g
 		|
@@ -16,6 +13,9 @@ Add-GETslData -Path C:\Repo\Github\My\GraphEngineModule\TSL\ -Namespace tsltest
 	  |
 	  e
 #>
+
+Set-GEConfigOption -LogDirectory "C:\Tests\psTrinityTests\storage\trinity-log" -StorageRoot "C:\Tests\psTrinityTests\storage" -LogEchoOnConsole $false
+Add-GETslData -Path C:\Repo\Github\My\GraphEngineModule\TSL\ -Namespace tsltest
 
 
 $a = [tsltest.node]::new("A")
@@ -36,8 +36,6 @@ Add-GEVertex -Vertex $f
 Add-GEVertex -Vertex $g
 Add-GEVertex -Vertex $h
 
-Get-GECellCount
-
 Add-GEEdge -from $a -to $b
 Add-GEEdge -from $b -to $c
 Add-GEEdge -from $c -to $f
@@ -47,3 +45,14 @@ Add-GEEdge -from $d -to $e
 
 Add-GEEdge -from $c -to $h
 Add-GEEdge -from $c -to $g
+
+Get-GECellCount
+
+$query = "MAG
+            .StartFrom($($d.CellId))
+            .FollowEdge(`"OutEdge`")
+            .VisitNode(_ => Action.Continue & Action.Return)
+            .FollowEdge(`"OutEdge`")
+            .VisitNode(_ => Action.Continue & Action.Return)"
+
+Get-GEVertex -Query $query

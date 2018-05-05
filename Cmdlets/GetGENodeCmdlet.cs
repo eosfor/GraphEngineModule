@@ -35,7 +35,28 @@ namespace GraphEngineModule
         public string ParameterValue;
 
         [Parameter(Mandatory = true, ParameterSetName = "ByLIKQQuery")]
-        public long StartFromID;
+        public string query;
+
+        protected override void BeginProcessing()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_BindingRedirect;
+            base.BeginProcessing();
+        }
+
+        private Assembly CurrentDomain_BindingRedirect(object sender, ResolveEventArgs args)
+        {
+            var name = new AssemblyName(args.Name);      
+            switch (name.Name)
+            {
+                case "Newtonsoft.Json":
+                    return typeof(Newtonsoft.Json.JsonSerializer).Assembly;
+                case "System.Collections.Immutable":
+                    return Assembly.LoadFrom("System.Collections.Immutable.dll");
+                default:
+                    return null;
+            }
+            //throw new NotImplementedException();
+        }
 
         protected override void ProcessRecord()
         {
@@ -60,13 +81,9 @@ namespace GraphEngineModule
 
         private void ByLIKQQuery()
         {
-            var t = KnowledgeGraph.StartFrom(StartFromID)
-                .FollowEdge("OutEdge")
-                .VisitNode(_ => FanoutSearch.Action.Return);
-            var r = t.ToList();
+            var r = LambdaDSL.Evaluate(query);
 
             WriteObject(r);
-            //throw new NotImplementedException();
         }
 
         private void ByID()

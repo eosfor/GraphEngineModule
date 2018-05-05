@@ -61,7 +61,6 @@ namespace GraphEngineMolule
 
             }
 
-
             if (this.MyInvocation.BoundParameters.ContainsKey("LogEchoOnConsole"))
             {
                 TrinityConfig.LogEchoOnConsole = false;
