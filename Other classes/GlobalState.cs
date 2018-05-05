@@ -47,6 +47,7 @@ namespace GraphEngineModule
 
                 LambdaDSL.SetDialect("MAG", "StartFrom", "VisitNode", "FollowEdge", "Action");
                 FanoutSearchModule.SetQueryTimeout(-1);
+
                 TrinityServer server = new TrinityServer();
                 server.RegisterCommunicationModule<FanoutSearchModule>();
                 server.Start();
