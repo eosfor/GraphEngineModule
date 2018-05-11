@@ -28,9 +28,14 @@ namespace GraphEngineMolule
         {
             if (!GlobalState.Instance.IsInitialized)
             {
-                GlobalState.Instance.Initialize(LogDirectory, StorageRoot, LogEchoOnConsole);
+                WriteVerbose($"Setting LogDirectory to: {LogDirectory}");
+                WriteVerbose($"Setting StorageRoot to: {StorageRoot}");
+                WriteVerbose($"Setting LogEchoOnConsole to: {LogEchoOnConsole}");
+                WriteVerbose($"Setting LogLevel to: {LogLevel}");
+
+                GlobalState.Instance.Initialize(LogDirectory, StorageRoot, LogEchoOnConsole, LogLevel);
             }
-            base.BeginProcessing();
+            //base.BeginProcessing();
         }
 
         protected override void ProcessRecord()

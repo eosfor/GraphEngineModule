@@ -14,7 +14,12 @@ invoke-pester ..\..\..\tests
 	  e
 #>
 
-Set-GEConfigOption -LogDirectory "C:\Tests\psTrinityTests\storage\trinity-log" -StorageRoot "C:\Tests\psTrinityTests\storage" -LogEchoOnConsole $false
+Set-GEConfigOption -LogDirectory "C:\Tests\psTrinityTests\storage\trinity-log"`
+				   -StorageRoot "C:\Tests\psTrinityTests\storage"`
+				   -LogEchoOnConsole $false `
+				   -LogLevel ([Trinity.Diagnostics.LogLevel]::new()) `
+				   -Verbose
+
 Add-GETslData -Path C:\Repo\Github\My\GraphEngineModule\TSL\ -Namespace tsltest
 
 
@@ -45,11 +50,12 @@ Add-GEEdge -from $d -to $e
 
 Add-GEEdge -from $c -to $h
 Add-GEEdge -from $c -to $g
+Add-GEEdge -from $g -to $c
 
 Get-GECellCount
 
 $query = "MAG
-            .StartFrom($($d.CellId))
+            .StartFrom($($g.CellId))
             .FollowEdge(`"OutEdge`")
             .VisitNode(_ => Action.Continue & Action.Return)
             .FollowEdge(`"OutEdge`")

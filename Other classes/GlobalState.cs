@@ -35,12 +35,13 @@ namespace GraphEngineModule
             }
         }
 
-        public void Initialize(string LogDirectory, string StorageRoot, bool LogEchoOnConsole)
+        public void Initialize(string LogDirectory, string StorageRoot, bool LogEchoOnConsole, Trinity.Diagnostics.LogLevel LogLevel)
         {
             if (!_isInitialized )
             {
                 TrinityConfig.LogEchoOnConsole = LogEchoOnConsole;
                 LoggingConfig.Instance.LogDirectory = LogDirectory;
+                LoggingConfig.Instance.LoggingLevel = LogLevel;
                 StorageConfig.Instance.StorageRoot = StorageRoot;
 
                 Global.Initialize();
